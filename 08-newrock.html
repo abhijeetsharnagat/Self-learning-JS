@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock Paper Scissors</title>
+
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #121212;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .card {
+      background: linear-gradient(to bottom, #1a1a1a, #121212);
+      color: #ecf0f1;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+      padding: 30px;
+      text-align: center;
+    }
+
+    p {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #3498db;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #ecf0f1;
+      text-align: center;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      animation: fadeIn 1s ease-in-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    button {
+      font-size: 16px;
+      padding: 15px 30px;
+      margin: 10px;
+      cursor: pointer;
+      background-color: #3498db;
+      color: #ecf0f1;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+      transform: scale(1.05);
+    }
+
+    .button1 {
+      background-color: #e74c3c;
+    }
+
+    .button1:hover {
+      background-color: #c0392b;
+    }
+
+    .icon-image {
+      width: 100px;
+      height: auto;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="card">
+    <p></p>
+    <h1>RPS Battle</h1>
+
+    <button onclick="pickComputerMove('Rock');">
+      <img src="images/rock.png" alt="Rock" class="icon-image">
+      Rock
+    </button>
+
+    <button onclick="pickComputerMove('Paper');">
+      <img src="images/paper.png" alt="Paper" class="icon-image">
+      Paper
+    </button>
+
+    <button onclick="pickComputerMove('Scissors');">
+      <img src="images/scissor.png" alt="Scissors" class="icon-image">
+      Scissors
+    </button>
+
+    <p></p>
+
+    <button class="button1" onclick="score.lose=0; score.ties=0; score.wins=0; alert('Score resetted');">
+      Reset
+    </button>
+  </div>
+
+  <script>
+    const score = JSON.parse(localStorage.getItem('score'));
+
+    let computerMove = '';
+    let result = '';
+    function pickComputerMove(playerMove) {
+      const randomNumb0 = Math.random();
+
+      if (randomNumb0 < 1 / 3) {
+        computerMove = 'Rock';
+      } else if (randomNumb0 < 2 / 3) {
+        computerMove = 'Paper';
+      } else {
+        computerMove = 'Scissors';
+      }
+
+      determineWinner(playerMove, computerMove);
+    }
+
+    function determineWinner(playerMove, computerMove) {
+      if (playerMove === computerMove) {
+        score.ties++;
+        alert(`Computer chooses ${computerMove}. It's a tie!\nWins: ${score.wins} | Lose: ${score.lose} | Ties: ${score.ties}`);
+      } else if (
+        (playerMove === 'Rock' && computerMove === 'Scissors') ||
+        (playerMove === 'Paper' && computerMove === 'Rock') ||
+        (playerMove === 'Scissors' && computerMove === 'Paper')
+      ) {
+        score.wins++;
+        alert(`Computer chooses ${computerMove}. You win!\nWins: ${score.wins} | Lose: ${score.lose} | Ties: ${score.ties}`);
+      } else {
+        score.lose++;
+        alert(`Computer chooses ${computerMove}. You lose!\nWins: ${score.wins} | Lose: ${score.lose} | Ties: ${score.ties}`);
+      }
+
+      localStorage.setItem('score', JSON.stringify(score));
+    }
+  </script>
+
+</body>
+
+</html>

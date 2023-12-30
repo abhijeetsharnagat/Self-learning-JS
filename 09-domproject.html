@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM Project</title>
+
+  <style>
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .card {
+      background-color: #242020;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      text-align: center;
+      margin: 20px;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    button {
+      border-radius: 10px;
+      background-color: #2d2d2d;
+      color: #ffffff;
+      padding: 10px 20px;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      margin-top: 15px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #555555;
+    }
+
+    h2 {
+      padding: 10px 0;
+    }
+
+    p {
+      color: #bbbbbb;
+    }
+
+    .js-input {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #555555;
+      background-color: #2d2d2d;
+      color: #ffffff;
+      margin-bottom: 15px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    input::placeholder {
+      color: #aaaaaa;
+    }
+
+    #totalOutput {
+      color: #ffffff;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h2>Youtube subscribe button</h2>
+    <button onclick="subscribe()">Subscribe</button>
+  </div>
+
+  <div class="card">
+    <h2>RPS Battle game</h2>
+    <button onclick="redirect()">Click here</button>
+  </div>
+
+  <div class="card">
+    <h2>Amazon shipping calculator</h2>
+    <p>Orders under $50 = +$10 shipping</p>
+    <p>Orders over $50 = free shipping</p>
+    <input placeholder="Cost of order" class="js-input" onkeydown="
+
+    handleKeydown(event)
+    ">
+    <p class="type"></p>
+    <button class="card2" type="button" onclick="calculateTotal()">Calculate</button>
+    <p id="totalOutput">Total is -</p>
+
+  </div>
+
+  <script>
+    let isTyping = false;
+
+    function subscribe() {
+      const button = document.querySelector('button');
+      if (button.innerText === 'Subscribe') {
+        button.innerText = 'Subscribed';
+        button.style.backgroundColor = 'Red';
+      } else {
+        button.innerText = 'Subscribe';
+        button.style.backgroundColor = 'White';
+      }
+    }
+
+    function redirect() {
+      window.open('09-dom-rock.html', '');
+    }
+
+    function calculateTotal() {
+      const inputElement = document.querySelector('.js-input');
+      const cost = parseFloat(inputElement.value);
+      let total = cost < 50 ? cost + 10 : cost;
+
+      const out = document.getElementById('totalOutput');
+      out.innerText = `Total is - ${total}`;
+    }
+
+    function typing() {
+      const startType = document.querySelector('.type');
+      startType.innerHTML = "Typing";
+
+      setTimeout(function () {
+        startType.innerHTML = "";
+      }, 500);
+    }
+
+    function handleKeydown(event) {
+      if (event.key === 'Enter') {
+        calculateTotal();
+      }
+      typing();
+    }
+  </script>
+
+</body>
+
+</html>

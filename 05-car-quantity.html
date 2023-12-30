@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    Cart quantity
+  </title>
+
+  <style>
+    button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin: 10px;
+      cursor: pointer;
+      background-color: slategrey;
+      box-shadow: inset;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      box-align: center;
+      align-self: center;
+      align-items: center;
+    }
+
+    h1 {
+      background-color: transparent;
+      text-align: center;
+      color: aliceblue;
+    }
+
+    body {
+      background-color: black;
+    }
+  </style>
+
+
+</head>
+
+<body>
+
+  <h1>
+    Cart Quantity
+  </h1>>
+
+  <button onclick="
+  console.log(`Cart quantity: ${cartQuantity}`);
+  alert(`Cart quantity: ${cartQuantity}`)
+  ">
+    Show quantity
+  </button>
+
+  <button onclick="
+  if (cartQuantity <10){
+    cartQuantity += 1;
+    console.log(`Cart quantity: ${cartQuantity}`)
+    alert(`Cart quantity: ${cartQuantity}`)
+  }
+  else {
+    alert('Cart is full')
+  }
+ 
+
+  ">
+    Add to cart
+  </button>
+
+  <button onclick="
+  
+  if (cartQuantity <10){
+    cartQuantity += 2;
+    console.log(`Cart quantity: ${cartQuantity}`)
+    alert(`Cart quantity: ${cartQuantity}`)
+  }
+  else {
+    alert('Cart is full')
+  }
+ 
+  ">
+    +2
+  </button>
+
+  <button onclick="
+  if (cartQuantity <8){
+    cartQuantity += 3;
+    console.log(`Cart quantity: ${cartQuantity}`)
+    alert(`Cart quantity: ${cartQuantity}`)
+  }
+  else {
+    alert('Cart is full')
+  }
+ 
+  ">
+    +3
+  </button>
+
+  <button onclick="
+  cartQuantity = 0;
+  console.log(`Cart resetd`)
+  console.log(`Cart quantity: ${cartQuantity}`)
+  alert(`Empty cart`)
+  ">
+    Resert cart
+  </button>
+
+  <script>
+
+    let cartQuantity = 0;
+    console.log(typeof cartQuantity);
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>
