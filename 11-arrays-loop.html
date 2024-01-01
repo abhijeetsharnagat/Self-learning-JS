@@ -28,6 +28,15 @@
       border: none;
       border-radius: 3px;
       cursor: pointer;
+      margin-right: 5px;
+    }
+
+    button.reset {
+      background-color: #dc3545;
+    }
+
+    button.reset:hover {
+      background-color: #bd2130;
     }
 
     h3 {
@@ -57,14 +66,16 @@
 <body>
 
   <h3>
-    To do list Practice 1
+    To-do List Practice 1
   </h3>
 
   <input class="input1" placeholder="Todo name" onkeydown="
   if (event.key === 'Enter'){
-    addToList();}">
+    addToList();
+  }">
 
   <button onclick="addToList()">Add</button>
+  <button onclick="resetTasks()" class="reset">Reset All</button>
 
   <table id="todoTable"></table>
 
@@ -89,7 +100,7 @@
     function task1(taskId, row) {
       const taskChange = document.querySelector(`#button-${taskId}`);
 
-      // Removing completed-task class from phle wali row
+      // Removing completed-task class from previously completed rows
       const rows = document.querySelectorAll('.completed-task');
       rows.forEach(r => r.classList.remove('completed-task'));
 
@@ -117,6 +128,15 @@
         cell2.innerHTML = `<button id="button-${task.id}" class="taskButton" onclick="task1(${task.id}, this.parentNode.parentNode)"> Incomplete task </button>`;
       });
     }
+
+    function resetTasks() {
+      localStorage.removeItem('todolist');
+      todolist.length = 0; // Clear the array
+      updateTable();
+    }
+
+    // Initial table update
+    updateTable();
   </script>
 
 </body>
