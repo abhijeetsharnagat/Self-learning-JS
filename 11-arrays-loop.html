@@ -3,12 +3,121 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=
-  , initial-scale=1.0">
-  <title>Arrays and loops</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arrays and Loops</title>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap">
+
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    .input1 {
+      padding: 8px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 8px 15px;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    h3 {
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    .taskButton {
+      padding-left: 15px;
+    }
+
+    table {
+      border-collapse: collapse;
+      padding: 20px;
+      width: 100%;
+      margin-top: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .completed-task {
+      background-color: red;
+    }
+  </style>
 </head>
 
 <body>
+
+  <h3>
+    To do list Practice 1
+  </h3>
+
+  <input class="input1" placeholder="Todo name" onkeydown="
+  if (event.key === 'Enter'){
+    addToList();}">
+
+  <button onclick="addToList()">Add</button>
+
+  <table id="todoTable"></table>
+
+  <script>
+    const todolist = JSON.parse(localStorage.getItem('todolist')) || [];
+    let taskCounter = 0;
+
+    function addToList() {
+      const inputElement = document.querySelector('.input1');
+      const fetchElement = inputElement.value.trim();
+
+      if (fetchElement !== "") {
+        taskCounter++;
+        todolist.push({ id: taskCounter, task: fetchElement, });
+
+        localStorage.setItem('todolist', JSON.stringify(todolist));
+
+        updateTable();
+      }
+    }
+
+    function task1(taskId, row) {
+      const taskChange = document.querySelector(`#button-${taskId}`);
+
+      // Removing completed-task class from phle wali row
+      const rows = document.querySelectorAll('.completed-task');
+      rows.forEach(r => r.classList.remove('completed-task'));
+
+      taskChange.innerHTML = 'Task completed';
+      row.classList.add('completed-task');
+
+      localStorage.setItem('todolist', JSON.stringify(todolist));
+    }
+
+    function updateTable() {
+      const table = document.getElementById('todoTable');
+      table.innerHTML = '';
+
+      const headerRow = table.insertRow(0);
+      const headerCell1 = headerRow.insertCell(0);
+      const headerCell2 = headerRow.insertCell(1);
+      headerCell1.innerHTML = '<b> Task </b>';
+      headerCell2.innerHTML = '<b> Action </b>';
+
+      todolist.forEach((task, index) => {
+        const row = table.insertRow(index + 1);
+        const cell1 = row.insertCell(0);
+        const cell2 = row.insertCell(1);
+        cell1.innerHTML = `Task ${task.id}: ${task.task}`;
+        cell2.innerHTML = `<button id="button-${task.id}" class="taskButton" onclick="task1(${task.id}, this.parentNode.parentNode)"> Incomplete task </button>`;
+      });
+    }
+  </script>
 
 </body>
 

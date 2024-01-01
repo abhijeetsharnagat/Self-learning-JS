@@ -82,7 +82,12 @@
 
   <div class="card">
     <h2>Youtube subscribe button</h2>
-    <button onclick="subscribe()">Subscribe</button>
+    <button onclick="subscribe()
+
+    ">Subscribe</button>
+    <h2 class="subscribe">
+
+    </h2>
   </div>
 
   <div class="card">
@@ -116,7 +121,29 @@
         button.innerText = 'Subscribe';
         button.style.backgroundColor = 'White';
       }
+
+      subs();
+
+      setTimeout();
+
+
+
     }
+
+    function subs() {
+      const subs1 = document.querySelector('.subscribe');
+      subs1.innerHTML = 'You have subscribed to channel';
+
+
+    }
+
+    setTimeout(function subs3() {
+      const subs2 = document.querySelector('.subscribe');
+      subs2.innerHTML = '';
+
+    }, 2000);
+
+
 
     function redirect() {
       window.open('09-dom-rock.html', '');
@@ -146,6 +173,13 @@
       }
       typing();
     }
+
+
+
+
+
+
+
   </script>
 
 </body>
